@@ -21,7 +21,6 @@ house_area['>120m²'] = 0
 house_price['<8500元'] = 0
 house_price['8500-9500元'] = 0
 house_price['9500-10000'] = 0
-house_price['10000']
 for house_info in house_infos:
     #  面积数据
     house_areas = house_info[-5].split('m²')[0]

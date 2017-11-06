@@ -12,7 +12,7 @@ print(house_infos)
 house_area = dict()
 house_price = dict()
 
-'''初始化字典 '''
+'''将房屋面积信息存在字典house_area中并初始化字典 '''
 house_area['<60m²'] = 0
 house_area['60m²-80m²'] = 0
 house_area['80m²-100m²'] = 0

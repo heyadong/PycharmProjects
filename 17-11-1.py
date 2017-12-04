@@ -36,7 +36,7 @@ for house_detail in house_details:
                        [house_name[0],
                         house_address[0],
                         house_items[0][0],
-                        house_items[0][1]])
+                        hose_items[0][1]])
 
 '''
 print(house_infos)

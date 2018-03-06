@@ -169,7 +169,7 @@ getattr(my_circle, 'print_radius')
 getattr(my_circle, 'radius')
 # setattr() 为类属性赋值,如果类中没有属性，添加属性后赋值。
 
-# 5、不使用__init__实例化一个对象：
+# 5、不使用__init__实例化对象：
 my_student = Students.__new__(Students)
 # in：print(my_student.name)
 # out:AttributeError: 'Students' object has no attribute '_name'

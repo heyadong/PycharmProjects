@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--对点击事件作出反应-->
+<button type="button" onclick="alert('欢迎')">点我</button>
+<!--document.write()直接写入页面-->
+<script type="text/javascript">
+    document.write('<p>这是一个段落</p>');
+    function my_function(){
+        var x = document.getElementById("demo")
+        x.style.color = '#ff0000'
+        }
+    function my_function1() {
+        var x = document.getElementById('demo1').value;
+        if(x===""|| isNaN(x)){
+            alert('请输入数字');
+            document.getElementById('demo1').value =""
+        }else{
+            alert("你输入的数字是："+ String.valueOf(x))
+        }
+    }
+    function my_function3() {
+        document.getElementById('demo').innerHTML='改变段落这是一个黑色字体'
+        //弹出警告框（window.alert）
+        window.alert('页面将改变')
+
+    }
+</script>
+<!--改变元素的样式 -->
+<p id="demo">
+    这是一个黑色字体
+</p>
+<div>
+<button type="button" onclick="my_function()">点击这里字体变为红色</button>
+<input id="demo1"  value="" type="text">
+<button type="button" onclick="my_function1()">检查</button>
+<button type="button" onclick="my_function3()">改变段落</button>
+</div>
+<div>
+<input id="demo4" value="" type="text">
+<input id="demo5" value="" type="text">
+</div>
+</body>
+</html>

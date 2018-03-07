@@ -189,14 +189,89 @@ class Point:
         return math.hypot(self.x - x1, self.y - y1)
 
     def __repr__(self):
-        return 'Point(%r,%r)' % (self.x ,self.y)
+        return 'Point(%r,%r)' % (self.x, self.y)
 
 
-points = [Point(1, 2),Point(3, 0),Point(10, -3),Point(-5, -7), Point(-1, 8),Point(3, 2)]
+points = [Point(1, 2), Point(3, 0), Point(10, -3), Point(-5, -7), Point(-1, 8), Point(3, 2)]
 points1 = points[:]
 points2 = points.copy()
-points1.sort(key=lambda r: r.distance(0,0),reverse=True)
+points1.sort(key=lambda r: r.distance(0, 0), reverse=True)
 print('排序后')
 print(points1)
 
+# 6、实现访问者模式（）
+# 7、创建缓存实例
+#   使用相同名字创建的实例只有一个：
+import logging
 
+a = logging.getLogger('a')
+b = logging.getLogger('b')
+c = logging.getLogger('a')
+print(a is b)
+# out: False
+print(a is c)
+
+
+# out: True
+# 使用工厂函数实现
+
+
+class Spam:
+    def __init__(self, name):
+        self.name = name
+
+
+import weakref
+
+_spam_cache = weakref.WeakValueDictionary()
+
+
+# 弱引用字典
+
+def get_spam(name):
+    if name not in _spam_cache:
+        s = Spam(name)
+        _spam_cache[name] = s
+    s = _spam_cache[name]
+    return s
+
+
+d = get_spam('foo')
+e = get_spam('ert')
+f = get_spam('foo')
+print(d is e)
+print(d is f)
+
+
+class CachedSpamManager2:
+    def __init__(self):
+        self._cache = weakref.WeakValueDictionary()
+
+    def get_spam(self, name):
+        if name not in self._cache:
+            temp = Spam3._new(name)  # Modified creation
+            self._cache[name] = temp
+        else:
+            temp = self._cache[name]
+        return temp
+
+    def clear(self):
+        self._cache.clear()
+
+
+class Spam3:
+    def __init__(self, *args, **kwargs):
+        raise RuntimeError("Can't instantiate directly")
+
+    # Alternate constructor
+    @classmethod
+    def _new(cls, name):
+        self = cls.__new__(cls)
+        self.name = name
+        return self
+
+
+j = Spam3._new('j')
+k = Spam3._new('K')
+m = Spam3._new('j')
+print(j is m)

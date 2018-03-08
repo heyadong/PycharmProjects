@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建JS对象</title>
+</head>
+<body>
+<p>创建对象</p>
+<p id="demo1"></p>
+<p>
+    访问对象的属性方法可以使用person.或者person['name']
+    对象的属性之间一定要用逗号隔开;
+    对象的方法定义了一个函数，并作为对象的属性存储。
+    对象方法通过添加 () 调用 (作为一个函数)。
+    对象存在两个相同属性的变量时以最后赋值的为准
+</p>
+<h1>笔记</h1>
+<h3>
+    1、全局的Javascript变量，在函数外声明的变量，网页上的所有Javascript都能访问
+    2、局部变量：函数内声明的变量（var)
+    3、局部变量没有声明就被赋值，将变成一个全局变量
+</h3>
+<hr>
+<h3>全选与取消全选的JS</h3>
+看书：<input type="checkbox" name="checkbox" value="1"><br>
+写代码：<input type="checkbox" name="checkbox" value="2"><br>
+学英语：<input type="checkbox" name="checkbox" value="3"><br>
+<button onclick="check_All('checkbox')">全选</button>
+<button onclick="drop_all('checkbox')">取消全选</button>
+<button onclick="check('checkbox')">全选/取消</button>
+
+<script>
+    function check_All(id_name) {
+        var object_list = document.getElementsByName(id_name);
+        console.log(object_list)
+        for(var i=0;i<object_list.length;i++){
+            object_list[i].checked = true
+        }
+    }
+    function drop_all(id_name) {
+        var ob_list = document.getElementsByName(id_name)
+        for(var i=0;i<ob_list.length;i++){
+            ob_list[i].checked = ""
+        }
+    }
+    var checked = false
+    function check(id_name) {
+        checked = !checked;
+        check_list =document.getElementsByName(id_name)
+        for(var i=0;i<check_list.length;i++){
+            check_list[i].checked=checked;
+        }
+
+    }
+    var person = {
+        firstName: 'he',
+        lastName: 'yadong',
+        age: 18,
+        fullName:function ()
+        {
+            return this.firstName+" "+this.lastName
+        },
+    };
+    document.getElementById('demo1').innerHTML = person.fullName()+" age is "+person.age
+
+</script>
+</body>
+</html>

@@ -29,7 +29,47 @@
 <button onclick="check_All('checkbox')">全选</button>
 <button onclick="drop_all('checkbox')">取消全选</button>
 <button onclick="check('checkbox')">全选/取消</button>
+<hr>
+<h3>2.JS作用域</h3>
+<p>作用域是可访问变量，对象(object)，函数(function)的集合<br></p>
+<p>在 ES6 中，提供了 let 关键字和 const 关键字。 <br>
+    let 的声明方式与 var 相同，用 let 来代替 var 来声明变量，就可以把变量限制在当前代码块中。<br>
+使用 const 声明的是常量，其值一旦被设定便不可被更改</p>
+<br>
+<hr>
+<h3>3.JavaScript 事件</h3>
+<p>html事件：<br>
+    1.页面加载时，<br>
+    2.页面元素被点击时：<button onclick="this.innerHTML=Date()">现在时间是：</button>
+    <button onmouseover="alert(Date())">鼠标移动到这里可以显示时间</button>
+    <br>
+    3.input字段改变时<br>
+</p><br>
+html事件列表：<br>
+<li> onchange	HTML 元素改变</li>
+<li> onclick	用户点击 HTML 元素</li>
+<li> onmouseover	用户在一个HTML元素上移动鼠标</li>
+<li> onmouseout	用户从一个HTML元素上移开鼠标</li>
+<li> onkeydown	用户按下键盘按键</li>
+<li> onload	浏览器已完成页面的加载</li>
+<hr>
+<h3>JS的逻辑运算符和比较运算符</h3>
+<p>逻辑运算符：&&(and),||(or) !(not)</p><br>
+<p>条件运算符(condition)?value1:value2</p><br>
+<input id="demo8" type="text"><button onclick="check_age()">检查</button>
+<hr>
+<h3>JS循环语句</h3>
+<p>for(x in object)循环遍历对象的属性和数字的<br>
+for(let [key,value] of object)循环遍历对象的属性和数字的<br>
+while循环和do{}while循环与JAVA用法一致。<br>
+    break 用于跳出循环，cotinue执行下一次循环.<br>
+</p>
+<p>Switch用法示例：</p>
+<input id="demo9" type="text"><button onclick="testSwich()">测试</button>
+<hr>
+<h3>
 
+</h3>
 <script>
     function check_All(id_name) {
         var object_list = document.getElementsByName(id_name);
@@ -43,7 +83,7 @@
         for(var i=0;i<ob_list.length;i++){
             ob_list[i].checked = ""
         }
-    }
+    };
     var checked = false
     function check(id_name) {
         checked = !checked;
@@ -52,7 +92,13 @@
             check_list[i].checked=checked;
         }
 
-    }
+    };
+    function check_age() {
+       var age = document.getElementById('demo8').value;
+       //条件表达式应用(嵌套）
+       var str = (age>18)?"已成年":(age==18)?"将要成年":"未成年";
+       window.alert(str)
+    };
     var person = {
         firstName: 'he',
         lastName: 'yadong',
@@ -62,8 +108,64 @@
             return this.firstName+" "+this.lastName
         },
     };
-    document.getElementById('demo1').innerHTML = person.fullName()+" age is "+person.age
-
+    document.getElementById('demo1').innerHTML = person.fullName()+" age is "+person.age;
+    //for循环示例
+    var obj = {name:'xiaohe',age:'18',sex:'male'};
+    var map_1 = new Map([['a',1],['b',2],['c',3]]);
+    for(let key in obj){
+        console.log(key);
+        console.log(obj[key]);
+    }
+    for(let entry of map_1){
+        console.log(entry)
+    };
+    function testSwich() {
+        let v = document.getElementById('demo9').value;
+        v = parseInt(v);
+        switch(v){
+            case 1:
+                alert('数字1');
+                break;
+            case 10:
+            case 11:
+                alert('数字11和数字10');
+                break;
+            default:
+                alert("不是10,1,11")
+                break
+    }
+    };
+    outerloop:
+for (var i = 0; i < 10; i++)
+{
+    innerloop:
+        for (var j = 0; j < 10; j++)
+        {
+        if (j > 3)
+        {
+            break;
+        }
+        if (i == 2)
+        {
+            break innerloop;
+        }
+        if (i == 4)
+        {
+            break outerloop;
+        }
+        document.write("i=" + i + " j=" + j + ""+'<br>');
+    }
+}
+//ajax示例
+    function ajaxDemo(){
+        var xmlhttp;
+        if(window.XMLHttpRequest){
+            xmlhttp = new XMLHttpRequest()
+        }
+        else{
+            xmlhttp = new ActiveXObject()
+        }
+    }
 </script>
 </body>
 </html>

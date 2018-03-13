@@ -68,9 +68,29 @@ while循环和do{}while循环与JAVA用法一致。<br>
 <input id="demo9" type="text"><button onclick="testSwich()">测试</button>
 <hr>
 <h3>
-
+JS 的异常处理 (try, catch(err))(throw)
 </h3>
+<p>异常测试<br>
+用法：try{},catch(err){}<br>
+    throw err
+</p>
+<input id="d1" type="text"><button onclick="test_Try()">测试</button><br>
+<p id="d2"></p>
+<hr>
+<h3>JS的表单验证</h3>
+<form  name="my_form" onsubmit="return check_form()" action="js_Object.html" method="post">
+    <tr>名字：</tr>
+    <tr><input type="text" name="fname"></tr>
+    <tr><input type="button" value="提交"></tr>
+</form>
 <script>
+    function check_form() {
+        var name = document.forms['my_form']['fname'].value;
+        if(name==null||name==''){
+            window.alert('名字必需填写');
+            return false;
+        }
+    }
     function check_All(id_name) {
         var object_list = document.getElementsByName(id_name);
         console.log(object_list)
@@ -91,7 +111,6 @@ while循环和do{}while循环与JAVA用法一致。<br>
         for(var i=0;i<check_list.length;i++){
             check_list[i].checked=checked;
         }
-
     };
     function check_age() {
        var age = document.getElementById('demo8').value;
@@ -164,6 +183,21 @@ for (var i = 0; i < 10; i++)
         }
         else{
             xmlhttp = new ActiveXObject()
+        }
+    }
+    // 自定义异常测试
+    function test_Try() {
+        var v = document.getElementById('d1').value
+        console.log(v)
+        try{
+            if(v=='') throw "请输入5-10之间的数字";
+            if(v>=5&&v<=10) throw '输入的数字是'+v;
+            if(v<5) throw '太小了';
+            if(v>10) throw '太大了';
+            if(isNaN(v)) throw "请输入数字"
+        }
+        catch(err) {
+            document.getElementById('d2').innerHTML= '错误：'+ err
         }
     }
 </script>

@@ -44,7 +44,8 @@
     <button onmouseover="alert(Date())">鼠标移动到这里可以显示时间</button>
     <br>
     3.input字段改变时<br>
-</p><br>
+</p>
+<p id="d5"></p><button onclick="display_time()">时间显示</button><br>
 html事件列表：<br>
 <li> onchange	HTML 元素改变</li>
 <li> onclick	用户点击 HTML 元素</li>
@@ -52,7 +53,21 @@ html事件列表：<br>
 <li> onmouseout	用户从一个HTML元素上移开鼠标</li>
 <li> onkeydown	用户按下键盘按键</li>
 <li> onload	浏览器已完成页面的加载</li>
-<hr>
+<p>JS的计时事件:<br>
+setInterval() - 间隔指定的毫秒数不停地执行指定的代码。<br>
+setTimeout() - 暂停指定的毫秒数后执行指定的代码<br></p>
+example:
+<form>
+    <input type="button" value="按下按钮后计时" onclick="set_time()">
+    <input type="text" id="t1">
+    <input type="button" onclick="clear_time()" value="清除计时">
+</form>
+<form>
+   请输入计时时间： <input type="text" id="t2" required="required">
+    <input type="button" value="开始计时" onclick="time1()">
+    <input type="button" value=" 暂停" id="t3" onclick="pass_time()">
+</form>
+<hr>text
 <h3>JS的逻辑运算符和比较运算符</h3>
 <p>逻辑运算符：&&(and),||(or) !(not)</p><br>
 <p>条件运算符(condition)?value1:value2</p><br>
@@ -66,6 +81,19 @@ while循环和do{}while循环与JAVA用法一致。<br>
 </p>
 <p>Switch用法示例：</p>
 <input id="demo9" type="text"><button onclick="testSwich()">测试</button>
+<hr>
+<h3>JS类型转换</h3>
+<p>1、将数字转化成字符串：<br>
+    1、String(100),String(100+20)<br>
+    2、var x=10;x.toString,(100+20).toString()<br>
+</p><br>
+<p>2、将布尔值转化成字符串：String(false) = "false"</p><br>
+<p>3、字符串转化成数字:<br>
+    1、Number("3.14") //3.14<br>
+    2、Number("") // 0 <br>
+    3、Number("99 88") // NaN<br>
+    4、parseInt()/parseFloat() 解析一个字符串并返回一个整数/浮点数
+</p>
 <hr>
 <h3>
 JS 的异常处理 (try, catch(err))(throw)
@@ -198,6 +226,62 @@ for (var i = 0; i < 10; i++)
         }
         catch(err) {
             document.getElementById('d2').innerHTML= '错误：'+ err
+        }
+    }
+    function display_time() {
+        var times = new Date();
+        var year = times.getFullYear();//获取4位数年份
+        console.log(year)
+        var date = times.getMonth();//获取月份
+        var day = times.getDate();//获取日
+        var hours = times.getHours()
+        var minutes = times.getMinutes()
+        var seconds =times.getSeconds()
+        if (minutes<10&&seconds<10){
+            time_text = year+'-'+date+'-'+day +"  "+hours+":"+0+minutes+":"+0+seconds;
+        }else if(minutes<10){
+            time_text = year+'-'+date+'-'+day +"  "+hours+":"+0+minutes+":"+seconds;
+        }else if(minutes>=10&&seconds<10){
+            time_text = year+'-'+date+'-'+day +"  "+hours+":"+minutes+":"+0+seconds;
+        }else{
+            time_text = year+'-'+date+'-'+day +"  "+hours+":"+minutes+":"+seconds;
+        }
+        document.getElementById('d5').innerHTML = time_text;
+    }
+    //执行定时任务setInterval()
+    //清除定时任务clearInterval()暂停定时任务
+    myVar = setInterval(function(){display_time()},2000);
+    function set_time() {
+        var x = document.getElementById('t1')
+        set_times=''
+        set_times = setTimeout(function () { x.value="2 seconds"},2000);
+        set_times = setTimeout(function () { x.value="4 seconds"},4000);
+        set_times = setTimeout(function () { x.value="6 seconds"},6000);
+        }
+    function clear_time() {
+        clearInterval(set_times) //注意当set_times是全局变量是有效
+    }
+    function time1() {
+        let mytimes = document.getElementById('t2').value;
+        b = Number(mytimes);
+        conunts = ''
+        console.log(b)
+        for(let i=0;i<b;i++) {
+            console.log(i);
+            counts = setTimeout(function () {document.getElementById('t2').value = b - i - 1},1000 * (i + 1))
+        }
+    }
+    var key1 = false;
+    function pass_time() {
+        button_name = document.getElementById('t3').value;
+        key1 = !key1;
+        if(key1) {
+            clearInterval(counts);
+            document.getElementById('t3').value = "继续";
+        }
+        else {
+            time1();
+            document.getElementById('t3').value = "暂停";
         }
     }
 </script>
